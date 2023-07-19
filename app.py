@@ -1,3 +1,28 @@
+from flask import Flask, jsonify, request
+from flask_pymongo import PyMongo
+
+app = Flask(__name__)
+app.config['MONGO_URI'] = 'mongodb+srv://jyotibaisoya:baisoya@cluster0.0gxpf.mongodb.net/ShowZillaDb?retryWrites=true&w=majority'  
+
+mongo = PyMongo(app)
+
+
+class User:
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = password
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'email': self.email,
+            'password': self.password
+        }
+
+
+
+
 
 
 @app.route('/users/register', methods=['POST'])
