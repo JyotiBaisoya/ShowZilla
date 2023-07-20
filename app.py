@@ -2,11 +2,13 @@ from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from bson import ObjectId
 from datetime import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb+srv://jyotibaisoya:baisoya@cluster0.0gxpf.mongodb.net/ShowZillaDb?retryWrites=true&w=majority'  
 
 mongo = PyMongo(app)
+CORS(app)
 
 
 class User:
