@@ -1,9 +1,14 @@
 import React from "react";
+import MovieCarousel from "./movieCarousel";
+import PopularMovies from "./popularMovies";
+import PopularEvents from "./popularevents";
 
 const HomePage=()=>{
     return (
          <div>
-            <h1>Home Page</h1>
+           <MovieCarousel/>
+           <PopularMovies/>
+           <PopularEvents/>
          </div>
     )
 }

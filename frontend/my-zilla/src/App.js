@@ -6,6 +6,10 @@ import SignupForm from './component/signup';
 import HomePage from './component/homepage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProfilePage from './component/profile';
+import Footer from './component/footer';
+import MoviesPage from './component/moviespage';
+import BookingPage from './component/bookingpage';
+import EventPage from './component/eventpage';
 
 function App() {
   return (
@@ -20,8 +24,13 @@ function App() {
     
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
+        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/bookings" element={<BookingPage />} />
+        <Route path="/events" element={<EventPage/>} />
+        
        
       </Routes>
+      <Footer/>
     </Router>
     </div>
   );

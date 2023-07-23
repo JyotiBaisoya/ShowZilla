@@ -36,18 +36,12 @@ const Navbar = () => {
             {name}
           </button>
         )}
-        <div className="navbar-dropdown">
-          <button className="navbar-link">Select City</button>
-          <div className="navbar-dropdown-content">
-            <a href="#">City 1</a>
-            <a href="#">City 2</a>
-            <a href="#">City 3</a>
-            {/* Add more cities as needed */}
-          </div>
-        </div>
-        <a className="navbar-link" href="#">About</a>
-        <a className="navbar-link" href="#">Contact</a>
-        <a className="navbar-link" href="#">Help</a>
+       
+        
+        <a className="navbar-link" href="#">Movies</a>
+        <a className="navbar-link" href="#">Events</a>
+        <a className="navbar-link" href="#">Offers</a>
+        <a className='navbar-link' href="#">Bookings</a>
       </div>
     </nav>
   );
