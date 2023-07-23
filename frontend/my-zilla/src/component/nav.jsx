@@ -37,11 +37,14 @@ const Navbar = () => {
           </button>
         )}
        
-        
-        <a className="navbar-link" href="#">Movies</a>
-        <a className="navbar-link" href="#">Events</a>
-        <a className="navbar-link" href="#">Offers</a>
-        <a className='navbar-link' href="#">Bookings</a>
+        <Link to="/movies"> <a className="navbar-link" href="#">Movies</a></Link>
+        <Link to="/events"> <a className="navbar-link" href="#">Events</a></Link>
+        <Link to="/offers"> <a className="navbar-link" href="#">Offers</a></Link>
+        <Link to="/bookings"> <a className='navbar-link' href="#">Bookings</a></Link>
+       
+       
+       
+       
       </div>
     </nav>
   );
