@@ -1,4 +1,5 @@
 gunicorn
 Flask
 flask_pymongo
+flask_cors
 
