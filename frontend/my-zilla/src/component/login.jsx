@@ -25,7 +25,11 @@ const LoginForm = () => {
          body:JSON.stringify(formData)
      })
      if(req.ok){
+        const data = await req.json();
+        console.log(data.user);
          localStorage.setItem("name",formData.name)
+         localStorage.setItem("user_id",data.user._id)
+        
          alert("logged in  successfully")
          window.location.href="/"
      }else{

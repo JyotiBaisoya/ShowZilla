@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 from bson import ObjectId
 from datetime import datetime
 from flask_cors import CORS
+from bson.json_util import dumps
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = 'mongodb+srv://jyotibaisoya:baisoya@cluster0.0gxpf.mongodb.net/ShowZillaDb?retryWrites=true&w=majority'  
@@ -63,15 +64,18 @@ class Show:
 
 
 class Event:
-    def __init__(self, title,description,date,participants):
+    def __init__(self, title,image,description,date,participants):
       self.title = title
+      self.image = image
       self.description = description
       self.date = date
       self.participants = participants
     def to_dict(self):
         return {
              'title': self.title,
+             'image':self.image,
              'description':self.description,
+
              'date': self.date,
              'participants':self.participants
         }
@@ -159,7 +163,8 @@ def login_user():
     user = mongo.db.users.find_one({"name":name})
     if user:
         if user["password"]==password:
-          return jsonify({"message":"user logged in successfully"})
+          user["_id"] = str(user["_id"]) 
+          return jsonify({"message":"user logged in successfully",'user': user})
         else:
             return jsonify({"message":"wrong password"})
     else:
@@ -182,6 +187,18 @@ def update_user(user_id):
     return jsonify({"message": "User not found"}), 404
 
 
+@app.route('/users/<user_id>', methods=['GET'])
+def get_user(user_id):
+    # Update an existing user in the database based on the request data
+    user_id = ObjectId(user_id)
+
+    
+    user_collection=mongo.db.users
+    user = user_collection.find_one({"_id": user_id})
+    if user:
+        user["_id"] = str(user["_id"]) 
+        return jsonify({"message": "User Information ","user":user}), 200
+    return jsonify({"message": "User not found"}), 404
 
 
 
@@ -211,11 +228,34 @@ def create_movie():
     return jsonify({"message": "Movie created successfully", "movie_id": str(movie_id)}), 201
 
 # Get all movies
+# @app.route('/movies', methods=['GET'])
+# def get_all_movies():
+#     movie_collection = mongo.db.movies
+#     movies = list(movie_collection.find({}))
+#     return jsonify(movies)
+
+# @app.route('/movies', methods=['GET'])
+# def get_all_movies():
+#     movie_collection = mongo.db.movies
+#     movies = list(movie_collection.find({}, {"_id": 0}))
+
+#     # Convert ObjectId to string for each movie
+#     for movie in movies:
+#         if 'shows' in movie:
+#             for show in movie['shows']:
+#                 if 'movie_id' in show:
+#                     show['movie_id'] = str(show['movie_id'])
+        
+#     return jsonify(movies)
+
 @app.route('/movies', methods=['GET'])
 def get_all_movies():
     movie_collection = mongo.db.movies
-    movies = list(movie_collection.find({}, {"_id": 0}))
-    return jsonify(movies)
+    movies = list(movie_collection.find({}, ))
+
+    # Use the custom JSON encoder to serialize the data
+    response = dumps(movies)
+    return response, 200, {'Content-Type': 'application/json'}
 
 # Get a specific movie by movie_id
 @app.route('/movies/<movie_id>', methods=['GET'])
@@ -264,15 +304,24 @@ def create_event():
     event_id = event_collection.insert_one(data).inserted_id
     return jsonify({"message": "Event created successfully", "event_id": str(event_id)}), 201
 
-# Backend API Endpoint for getting all events
 @app.route('/events', methods=['GET'])
 def get_all_events():
     event_collection = mongo.db.events
-    events = list(event_collection.find({}))
-    for event in events:
-       event["_id"] = str(event["_id"])
+    events = list(event_collection.find({} ))
 
-    return jsonify(events)
+    # Use the custom JSON encoder to serialize the data
+    response = dumps(events)
+    return response, 200, {'Content-Type': 'application/json'}
+
+# Backend API Endpoint for getting all events
+# @app.route('/events', methods=['GET'])
+# def get_all_events():
+#     event_collection = mongo.db.events
+#     events = list(event_collection.find({}))
+#     for event in events:
+#        event["_id"] = str(event["_id"])
+
+#     return jsonify(events)
 
 
 # Backend API Endpoint for creating a participant
@@ -381,7 +430,7 @@ def book_movie(movie_id):
     movie_collection =mongo.db.movies
     movie_booking_collection = mongo.db.moviebookings
     # Validate user_id and num_tickets
-    if not user_id or not num_tickets or num_tickets <= 0:
+    if not user_id or not num_tickets or int(num_tickets) <= 0:
         return jsonify({"error": "Invalid user ID or number of tickets"}), 400
 
     # Check if the movie exists
@@ -422,6 +471,11 @@ def get_all_event_bookings():
         booking["_id"] = str(booking["_id"])
 
     return jsonify(event_bookings)
+
+
+
+
+
 
 
 if __name__ == '__main__':
