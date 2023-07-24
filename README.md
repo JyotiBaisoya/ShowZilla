@@ -1,4 +1,6 @@
 # ShowZilla
+## Home Page
+![Showzilla homepage](https://github.com/JyotiBaisoya/ShowZilla/assets/112819979/393958a7-ab53-42bc-8d93-6fdfeb4fdfb6)
 
 # Description
 The Movie and Event Management System is a web application that allows users to view and book movies and events. The system provides a user-friendly interface to browse through a list of available movies and events, view their details, and make bookings. It also provides a booking history for users to keep track of their reservations.
