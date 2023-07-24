@@ -40,12 +40,13 @@ Set up the database:
 Make sure you have MongoDB installed and running.
 Create a new MongoDB database for the project and update the database connection URL in backend/app.py.
 
-# In the frontend directory:
+## In the frontend directory:
 npm start
 
-# In the backend directory:
+##  In the backend directory:
 python app.py
-Access the application in your web browser:
+
+## Access the application in your web browser:
 Open http://localhost:3000 to access the ShowZilla.
 
 # Usage
