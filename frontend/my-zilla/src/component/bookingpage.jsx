@@ -202,7 +202,7 @@ const BookingPage = () => {
 
   async function fetchMovieBookings() {
     try {
-      let req = await fetch(`http://127.0.0.1:5000/moviebookings?user_id=${user_id}`);
+      let req = await fetch(`https://flaskagain.onrender.com/moviebookings?user_id=${user_id}`);
       let data = await req.json();
       let newdata =  data.filter((item)=>{
                 return item.user_id == user_id
@@ -217,7 +217,7 @@ const BookingPage = () => {
 
   async function fetchEventBookings() {
     try {
-      let req = await fetch(`http://127.0.0.1:5000/eventbookings?user_id=${user_id}`);
+      let req = await fetch(`https://flaskagain.onrender.com/eventbookings?user_id=${user_id}`);
       let data = await req.json();
       setEventBookings(data);
       setEventData(Array(data.length).fill(null)); // Initialize eventData state with null for each booking
@@ -234,7 +234,7 @@ const BookingPage = () => {
     });
 
     try {
-      let req = await fetch(`http://127.0.0.1:5000/movies`);
+      let req = await fetch(`https://flaskagain.onrender.com/movies`);
       let data = await req.json();
       let newdata = data.find((item) => item._id.$oid === movie_id);
 
@@ -268,7 +268,7 @@ const BookingPage = () => {
     });
 
     try {
-      let req = await fetch(`http://127.0.0.1:5000/events/${event_id}`);
+      let req = await fetch(`https://flaskagain.onrender.com/events/${event_id}`);
       let data = await req.json();
 
       setEventData((prevData) => {

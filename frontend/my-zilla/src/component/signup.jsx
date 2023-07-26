@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/signup.css';
+import Swal from 'sweetalert2';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const SignupForm = () => {
 
    async function registerFunction(){
        try {
-        let req = await fetch("http://127.0.0.1:5000/users/register",{
+        let req = await fetch("https://flaskagain.onrender.com/users/register",{
             method:"POST",
             headers:{
                 "content-type":"application/json"
@@ -27,10 +28,10 @@ const SignupForm = () => {
             body:JSON.stringify(formData)
         })
         if(req.ok){
-            alert("registerd successfully")
+            Swal.fire("registerd successfully")
             window.location.href="/login"
         }else{
-            alert("something went wrong")
+            Swal.fire("something went wrong")
         }
        } catch (error) {
           alert(error)

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/login.css';
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ const LoginForm = () => {
   
   async function loginFunction(){
     try {
-     let req = await fetch("http://127.0.0.1:5000/users/login",{
+     let req = await fetch("https://flaskagain.onrender.com/users/login",{
          method:"POST",
          headers:{
              "content-type":"application/json"
@@ -30,10 +31,10 @@ const LoginForm = () => {
          localStorage.setItem("name",formData.name)
          localStorage.setItem("user_id",data.user._id)
         
-         alert("logged in  successfully")
+         Swal.fire("logged in  successfully")
          window.location.href="/"
      }else{
-         alert("something went wrong")
+         Swal.fire("something went wrong")
      }
     } catch (error) {
        alert(error)

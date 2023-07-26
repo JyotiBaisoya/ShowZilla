@@ -84,7 +84,7 @@ const ProfilePage = () => {
   useEffect(() => {
     // Fetch user data from the fake API
       // let req = await fetch("http://127.0.0.1:5000/users/64b973cd582da16caa7072ea")
-    fetch(`http://127.0.0.1:5000/users/${user_id}`)
+    fetch(`https://flaskagain.onrender.com/users/${user_id}`)
       .then((response) => response.json())
       .then((data) => setUser(data.user))
       .catch((error) => console.error('Error fetching user data:', error));
