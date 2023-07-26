@@ -5,7 +5,7 @@ function MoviesPage() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch(' http://127.0.0.1:5000/movies') 
+    fetch(' https://flaskagain.onrender.com/movies') 
       .then((response) => response.json())
       .then((data) => setMovies(data))
       .catch((error) => console.error('Error fetching movie data:', error));

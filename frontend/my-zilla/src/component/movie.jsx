@@ -38,7 +38,7 @@ const Movie = ({ movieData }) => {
          let user_id = localStorage.getItem("user_id")
           let obj ={"timing":selectedTiming,"num_tickets":numTickets,"user_id":user_id}
            try {
-            let req = await fetch(`http://127.0.0.1:5000/movies/${movieId}/book`,{
+            let req = await fetch(`https://flaskagain.onrender.com/movies/${movieId}/book`,{
               method:"POST",
               headers:{
                 "content-type":"application/json"
